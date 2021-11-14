@@ -1,5 +1,8 @@
+import Image from 'next/image'
 import { useQuery } from 'react-query'
 
+import PHUserData from '@Components/Placeholders/PHUserData'
+import Container from '@Components/Container'
 import { userService } from '@Service'
 
 const App = () => {
@@ -7,28 +10,49 @@ const App = () => {
     userService.getRamdomUser()
   )
 
-  console.log({ data })
+  const renderUserData = () => {
+    const {
+      name,
+      email,
+      phone,
+      picture,
+      dob: { age },
+    } = data.results[0]
 
-  if (isLoading) return <div>Loading...</div>
-
-  if (error) return <div>Error</div>
-
-  const { results } = data
-
+    return (
+      <div className="flex border border-gray-300 rounded-md p-4 w-full">
+        <div className="mr-5">
+          <Image
+            loader={({ src }) => `${src}`}
+            src={picture.medium}
+            alt="user-photo"
+            width={80}
+            height={80}
+            className="rounded-full overflow-hidden"
+            unoptimized={false}
+          />
+        </div>
+        <p className="text-base lg:text-xl">
+          <h2 className="font-medium text-3xl mb-3">{`${name.first} ${name.last}`}</h2>
+          <b>Last Name:</b> {name.last} <br />
+          <b>Email:</b> {email} <br />
+          <b>Number:</b> {phone} <br />
+          <b>Age:</b> {age} <br />
+        </p>
+      </div>
+    )
+  }
   return (
-    <div className="h-screen bg-gray-800 flex justify-center items-center">
+    <Container>
       <div className="px-4 md:px-0 flex flex-col items-center text-white">
         <h1 className="text-4xl lg:text-5xl font-bold mb-12 text-center">
           Ramdom User 😀
         </h1>
-        <p className="text-base  lg:text-xl">
-          <b>Name:</b> {results[0].name.first} <br />
-          <b>Last Name:</b> {results[0].name.last} <br />
-          <b>Email:</b> {results[0].email} <br />
-          <b>Number:</b> {results[0].phone} <br />
-        </p>
+        {isLoading && <PHUserData />}
+        {error && <div>Error</div>}
+        {!isLoading && !error && data && renderUserData()}
       </div>
-    </div>
+    </Container>
   )
 }
 
