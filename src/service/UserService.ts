@@ -11,7 +11,7 @@ interface ResponseUser {
   }
 }
 
-export const getRamdomUser = async () => {
+const getRamdomUser = async () => {
   return fetcher<ResponseUser>({
     endpoint: 'https://randomuser.me/api/',
   })

@@ -10,17 +10,23 @@ const App = () => {
     userService.getRamdomUser()
   )
 
+  // console.log({ data, isLoading, error })
+
   const renderUserData = () => {
     const {
       name,
       email,
       phone,
       picture,
+      gender,
       dob: { age },
     } = data.results[0]
 
     return (
-      <div className="flex border border-gray-300 rounded-md p-4 w-full">
+      <div
+        data-testid="user-data"
+        className="flex border border-gray-300 rounded-md p-4 w-full"
+      >
         <div className="mr-5">
           <Image
             loader={({ src }) => `${src}`}
@@ -32,16 +38,19 @@ const App = () => {
             unoptimized={false}
           />
         </div>
-        <p className="text-base lg:text-xl">
+        <div className="text-base lg:text-xl">
           <h2 className="font-medium text-3xl mb-3">{`${name.first} ${name.last}`}</h2>
-          <b>Last Name:</b> {name.last} <br />
           <b>Email:</b> {email} <br />
-          <b>Number:</b> {phone} <br />
           <b>Age:</b> {age} <br />
-        </p>
+          <b>Gender:</b> {gender} <br />
+          <b>Number:</b> {phone} <br />
+        </div>
       </div>
     )
   }
+
+  if (error) return <div>Error</div>
+
   return (
     <Container>
       <div className="px-4 md:px-0 flex flex-col items-center text-white">

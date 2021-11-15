@@ -1,5 +1,3 @@
-import { API_BASE_URL } from '@Constants'
-
 //FETCHER
 export async function fetcher<DataResponse>({
   endpoint,
@@ -16,7 +14,7 @@ export async function fetcher<DataResponse>({
     [key: string]: string
   }
 }) {
-  const response = await fetch(`${API_BASE_URL}${endpoint}`, {
+  const response = await fetch(`${endpoint}`, {
     method,
     headers,
     body: JSON.stringify(body),

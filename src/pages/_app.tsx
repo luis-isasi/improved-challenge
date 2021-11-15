@@ -4,7 +4,7 @@ import { QueryClient, QueryClientProvider } from 'react-query'
 import '../styles/globals.css'
 
 //creating a query client
-const queryClient = new QueryClient()
+export const queryClient = new QueryClient()
 
 function MyApp({ Component, pageProps }: AppProps) {
   return (

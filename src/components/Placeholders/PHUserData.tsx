@@ -1,6 +1,9 @@
 const PHUserData = () => {
   return (
-    <div className="border border-gray-300 shadow rounded-md p-4 w-full mx-auto">
+    <div
+      data-testid="user-loading"
+      className="border border-gray-300 shadow rounded-md p-4 w-full mx-auto"
+    >
       <div className="animate-pulse flex space-x-4">
         <div className="rounded-full bg-gray-400 h-17 w-17"></div>
         <div className="flex-1 space-y-6 py-1">
