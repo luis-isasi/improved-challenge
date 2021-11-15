@@ -10,8 +10,6 @@ const App = () => {
     userService.getRamdomUser()
   )
 
-  // console.log({ data, isLoading, error })
-
   const renderUserData = () => {
     const {
       name,
